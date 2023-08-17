@@ -1,8 +1,14 @@
 import React from 'react';
+import {Post} from "@/service/posts";
 
-function PostsGrid() {
+type Props = {
+    posts:Post[]
+}
+function PostsGrid({posts}:Props) {
     return (
-        <div></div>
+        <ul>
+            {posts.map(post => <li key={post.path}>{post.title}</li>)}
+        </ul>
     );
 }
 
