@@ -1,6 +1,9 @@
+import Hero from "@/components/Hero";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className='bg-gray-500'>Main</main>
+    <>
+      <Hero/>
+    </>
   )
 }
