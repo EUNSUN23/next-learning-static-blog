@@ -1,8 +1,14 @@
-import React from 'react';
+import {getAllPosts, Post} from "@/service/posts";
+import Category from "@/components/Category";
+import FilterablePosts from "@/components/FilterablePosts";
 
-function PostsPage() {
+async function PostsPage() {
+    const posts = await getAllPosts();
+    const categories = Array.from(new Set(posts.map(post => post.category)));
     return (
-        <div></div>
+        <>
+            <FilterablePosts categories={categories} posts={posts}/>
+        </>
     );
 }
 

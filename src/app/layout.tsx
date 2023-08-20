@@ -18,13 +18,13 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className={sans.className}> {/*페이지 전체 폰트 설절*/}
-        <body className='flex flex-col w-full max-w-screen-2xl mx-auto'>
-            <Header/>
-            <main className='grow'>
-                {children}
-            </main>
-            <Footer/>
-        </body>
+            <body className='flex flex-col w-full max-w-screen-2xl mx-auto'>
+                <Header/>
+                <main className='grow'>
+                    {children}
+                </main>
+                <Footer/>
+            </body>
         </html>
     )
 }

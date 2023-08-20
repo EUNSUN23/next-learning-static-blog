@@ -9,7 +9,7 @@ async function FeaturedPosts() {
         <section className='my-2'>
             <h2 className='text-2xl font-bold my-4'>Featured Posts</h2>
             <PostsGrid posts={posts}/>
-            <CarouselPosts />
+
         </section>
     );
 }
