@@ -1,5 +1,5 @@
 import React from 'react';
-import {getPost} from "@/service/posts";
+import {getPostData} from "@/service/posts";
 
 type Props = {
     params:{
@@ -8,14 +8,14 @@ type Props = {
 }
 
 async function PostPage({params}:Props) {
-    const post = await getPost(params.slug);
+    const post = await getPostData(params.slug);
 
     if(!post) return null;
     return (
-        <section>
-            <p>{post.title}</p>
-
-        </section>
+        <>
+            <h1>{post.title}</h1>
+            <pre>{post.content}</pre>
+        </>
     );
 }
 
