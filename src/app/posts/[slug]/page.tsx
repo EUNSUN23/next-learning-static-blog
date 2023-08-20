@@ -1,5 +1,8 @@
 import React from 'react';
 import {getPostData} from "@/service/posts";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import MarkdownViewer from "@/components/MarkdownViewer";
 
 type Props = {
     params:{
@@ -14,7 +17,7 @@ async function PostPage({params}:Props) {
     return (
         <>
             <h1>{post.title}</h1>
-            <pre>{post.content}</pre>
+            <MarkdownViewer content={post.content}/>
         </>
     );
 }
