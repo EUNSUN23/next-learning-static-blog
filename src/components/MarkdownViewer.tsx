@@ -14,7 +14,7 @@ import Image from "next/image";
 function MarkdownViewer({content}:{content:string}) {
     return (
         <ReactMarkdown
-            className='prose lg:prose-xl'
+            className='prose max-w-none'
             remarkPlugins={[remarkGfm]}
             components={{
                 code({node, inline, className, children, ...props}) {
