@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import SyntaxHighlighter from "react-syntax-highlighter/dist/cjs/prism";
 import {materialDark} from "react-syntax-highlighter/dist/cjs/styles/prism";
+import Image from "next/image";
 
 // prose : tailwind.css를 사용하면 기본 css는 모두 reset되는데, @tailwindcss/typhograpy플러그인을 설치하고
 // prose키워드를 사용하면 기본 css가 적용되게 할 수 있다.
@@ -32,7 +33,12 @@ function MarkdownViewer({content}:{content:string}) {
                             {children}
                         </code>
                     )
-                }
+                },
+                img: (image) => <Image
+                                        src={image.src || ''}
+                                       alt={image.alt || ''}
+                                       width={500}
+                                       height={350}/>
             }}
 
         >{content}</ReactMarkdown>
