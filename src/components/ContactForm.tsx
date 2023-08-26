@@ -1,6 +1,7 @@
 'use client';
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import Banner, {BannerData} from "@/components/Banner";
+import {sendContactEmail} from "@/service/contact";
 
 type Form = {
     from: string;
@@ -8,8 +9,10 @@ type Form = {
     message: string;
 }
 
+const DEFAULT_DATA = {from: '', subject: '', message: ''};
+
 function ContactForm() {
-    const [form, setForm] = useState<Form>({from: '', subject: '', message: ''});
+    const [form, setForm] = useState<Form>(DEFAULT_DATA);
     const [banner, setBanner] = useState<BannerData | null>(null);
     const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const {name, value} = e.target;
@@ -18,16 +21,28 @@ function ContactForm() {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(form)
-        setBanner({message: '성공!!', state: 'success'});
-        setTimeout(()=>{
-            setBanner(null);
-        },3000);
+        sendContactEmail(form)
+            .then(() => { // 성공
+                setBanner({
+                    message: '메일을 성공적으로 보냈습니다.', state: 'success'
+                });
+                setForm(DEFAULT_DATA);
+            })
+            .catch(() => { // 실패
+                setBanner({
+                    message: '메일 전송에 실패했습니다. 다시 시도해 주세요', state: 'error'
+                });
+            }).finally(() => {
+                setTimeout(() => {
+                    setBanner(null);
+                }, 3000);
+            });
     }
     return (
         <section className='w-full max-w-md'>
             {banner && <Banner banner={banner}/>}
-            <form onSubmit={onSubmit} className='w-full flex flex-col gap-2 my-4 p-4 bg-slate-700 rounded-xl text-white'>
+            <form onSubmit={onSubmit}
+                  className='w-full flex flex-col gap-2 my-4 p-4 bg-slate-700 rounded-xl text-white'>
                 <label htmlFor="from" className='font-semibold'>Your Email</label>
                 <input type="email" id="from" name="from" required autoFocus value={form.from} onChange={onChange}/>
                 <label htmlFor="subject" className='font-semibold'>Subject</label>
