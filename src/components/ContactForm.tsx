@@ -44,9 +44,9 @@ function ContactForm() {
             <form onSubmit={onSubmit}
                   className='w-full flex flex-col gap-2 my-4 p-4 bg-slate-700 rounded-xl text-white'>
                 <label htmlFor="from" className='font-semibold'>Your Email</label>
-                <input type="email" id="from" name="from" required autoFocus value={form.from} onChange={onChange}/>
+                <input type="email" id="from" name="from" className='text-black' required autoFocus value={form.from} onChange={onChange}/>
                 <label htmlFor="subject" className='font-semibold'>Subject</label>
-                <input type="text" id="subject" name="subject" required autoFocus value={form.subject}
+                <input type="text" id="subject" name="subject" className='text-black' required autoFocus value={form.subject}
                        onChange={onChange}/>
                 <label htmlFor="message" className='font-semibold'>Message</label>
                 <textarea rows={10} id="message" name="message" required autoFocus value={form.message}
