@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import {getPostData} from "@/service/posts";
+import {getFeaturedPosts, getPostData} from "@/service/posts";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import MarkdownViewer from "@/components/MarkdownViewer";
@@ -51,6 +51,14 @@ async function PostPage({params}:Props) {
             </section>
         </article>
     );
+}
+
+// featured posts에 한해서 미리 페이지 생성
+export async function generateStaticParams(){
+    const posts = await getFeaturedPosts();
+    return posts.map(post => {
+        slug:post.path
+    })
 }
 
 export default PostPage;
