@@ -1,7 +1,14 @@
 import React from 'react';
 import Hero from "@/components/Hero";
+import {Metadata} from "next";
 
 const TITLE_CLASS = 'bg-gray-100 shadow-lg p-8 m-8 text-gray-800 my-2';
+
+export const metadata: Metadata = {
+    title:"Eunsun's blog| About Eunsun",
+    description: "Eunsun 프로파일 페이지",
+}
+
 function AboutPage() {
     return (
         <>

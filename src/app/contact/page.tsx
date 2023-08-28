@@ -1,6 +1,7 @@
 import React from 'react';
 import {AiFillGithub, AiFillLinkedin, AiFillYoutube} from "react-icons/ai";
 import ContactForm from "@/components/ContactForm";
+import {Metadata} from "next";
 
 const LINKS = [
     {icon: <AiFillGithub/>, url: ''},
@@ -8,6 +9,11 @@ const LINKS = [
     {icon: <AiFillYoutube/>, url: ''},
 
 ]
+
+export const metadata: Metadata = {
+    title: "Eunsun's blog | Contact",
+    description: "Contact 페이지"
+}
 
 function ContactPage() {
     return (

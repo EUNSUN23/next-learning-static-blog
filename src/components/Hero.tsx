@@ -2,7 +2,7 @@ import React from 'react';
 import Image from "next/image";
 import profileImage from '../../public/images/profile.png';
 import Link from "next/link";
-
+// todo - public/images/ 이미지들 git add
 function Hero() {
     return (
         <section className='text-center'>

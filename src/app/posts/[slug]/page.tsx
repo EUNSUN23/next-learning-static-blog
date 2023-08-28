@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import MarkdownViewer from "@/components/MarkdownViewer";
 import {AiTwotoneCalendar} from "react-icons/ai";
+import {Metadata} from "next";
 
 type Props = {
     params:{
@@ -15,6 +16,15 @@ type Props = {
 /* tailwind.css
 *  h-1/5 max-h-[500px] : 기본 높이는 전체 브라우저 높이의 1/5이지만 높이가 500px을 넘어가면 더이상 증가하지 않는다.
 * */
+
+// 동적으로 metadata 생성
+export async function generateMetadata({params: {slug}}: Props):Promise<Metadata>{
+    const {title,description,date, path, content} = await getPostData(slug);
+    return {
+        title, description
+    }
+}
+
 async function PostPage({params}:Props) {
     const {title,description,date, path, content} = await getPostData(params.slug);
 
