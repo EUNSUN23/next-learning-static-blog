@@ -1,6 +1,6 @@
 import path from "path";
 import {readFile} from "fs/promises";
-import {cache} from "browserslist";
+import {cache} from "react";
 
 export type Post = {
     title: string;
@@ -17,7 +17,7 @@ export type PostData = Post & { content: string };
 export async function getPostData(fileName: string): Promise<PostData> {
     const filePath = path.join(process.cwd(), 'data', 'posts', `${fileName}.md`);
     const metadata = await getAllPosts()
-        .then(posts => posts.find(post => post.path === fileName));
+        .then((posts:Post[]) => posts.find((post:Post) => post.path === fileName));
     if (!metadata)
         throw new Error(`${fileName}에 해당하는 포스트를 찾을 수 없음`);
 
@@ -27,12 +27,12 @@ export async function getPostData(fileName: string): Promise<PostData> {
 
 export async function getFeaturedPosts(): Promise<Post[]> {
     return getAllPosts()
-        .then((posts) => posts.filter((post) => post.featured));
+        .then((posts:Post[]) => posts.filter((post) => post.featured));
 }
 
 export async function getNonFeaturedPosts(): Promise<Post[]> {
     return getAllPosts()
-        .then((posts) => posts.filter((post) => !post.featured));
+        .then((posts:Post[]) => posts.filter((post) => !post.featured));
 }
 
 // [성능 관련 문제 체크]
@@ -52,4 +52,4 @@ export const getAllPosts = cache(async ()=>{
     return readFile(filePath, 'utf-8')
         .then<Post[]>(JSON.parse)
         .then((posts) => posts.sort((a, b) => a.date > b.date ? -1 : 1));
-})
+});

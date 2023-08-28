@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 async function PostsPage() {
     const posts = await getAllPosts();
-    const categories = Array.from(new Set(posts.map(post => post.category)));
+    const categories:string[] = Array.from(new Set(posts.map((post:Post) => post.category)));
     return (
         <>
             <FilterablePosts categories={categories} posts={posts}/>
